@@ -1,49 +1,71 @@
 
-import { Date } from "date-fns";
+import React from "react";
+import { format, isSameDay, parseISO } from "date-fns";
 import { zhTW } from "date-fns/locale";
-import { format } from "date-fns";
-import { Calendar as CalendarComponent } from "@/components/ui/calendar";
-import { CalendarEvent, groupEventsByDate } from "./data";
+import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { CalendarEvent } from "./data";
 
 interface CalendarWithEventsProps {
   events: CalendarEvent[];
   selectedDate: Date;
-  onSelectDate: (date: Date | undefined) => void;
+  onDateChange: (date: Date | undefined) => void;
 }
 
-export const CalendarWithEvents = ({
+export function CalendarWithEvents({
   events,
   selectedDate,
-  onSelectDate
-}: CalendarWithEventsProps) => {
-  const eventsByDate = groupEventsByDate(events);
-  
-  // Custom renderer for calendar days with events
-  const renderDay = (day: Date) => {
-    const dateKey = format(day, "yyyy-MM-dd");
-    const hasEvents = !!eventsByDate[dateKey];
-    
-    return (
-      <div className="relative">
-        <div>{day.getDate()}</div>
-        {hasEvents && (
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-secondary" />
-        )}
-      </div>
-    );
-  };
+  onDateChange,
+}: CalendarWithEventsProps) {
+  // Function to highlight dates with events
+  function isDayWithEvent(day: Date) {
+    return events.some((event) => {
+      const eventDate = parseISO(event.date);
+      return isSameDay(eventDate, day);
+    });
+  }
+
+  // Count events for a specific day
+  function getEventsForDay(day: Date) {
+    return events.filter((event) => {
+      const eventDate = parseISO(event.date);
+      return isSameDay(eventDate, day);
+    });
+  }
 
   return (
-    <CalendarComponent
+    <Calendar
       mode="single"
       selected={selectedDate}
-      onSelect={onSelectDate}
-      className="rounded-md mx-auto"
+      onSelect={onDateChange}
+      className="rounded-md border shadow"
       locale={zhTW}
       components={{
-        DayContent: (props) => renderDay(props.date),
+        day: ({ day, ...props }) => {
+          const dayEvents = getEventsForDay(day);
+          const hasEvents = dayEvents.length > 0;
+          return (
+            <div
+              {...props}
+              className={cn(
+                props.className,
+                hasEvents && "relative"
+              )}
+            >
+              {format(day, "d")}
+              {hasEvents && (
+                <Badge
+                  className="absolute -bottom-1 -right-1 h-4 w-4 p-0 flex items-center justify-center text-[10px]"
+                  variant="secondary"
+                >
+                  {dayEvents.length}
+                </Badge>
+              )}
+            </div>
+          );
+        },
       }}
     />
   );
-};
+}

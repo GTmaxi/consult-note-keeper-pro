@@ -16,9 +16,12 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-background flex">
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-      <div className={cn("flex-1 flex flex-col", sidebarOpen && !isMobile ? "ml-64" : "")}>
+      <div className={cn(
+        "flex-1 flex flex-col transition-all duration-200 ease-in-out",
+        sidebarOpen && !isMobile ? "ml-64" : ""
+      )}>
         <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-        <main className="flex-1 p-4 md:p-6 overflow-auto">
+        <main className="flex-1 p-4 md:p-6 overflow-x-auto w-full">
           {children}
         </main>
       </div>
