@@ -1,5 +1,6 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import Sidebar from "./Sidebar";
@@ -12,12 +13,20 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
+  const location = useLocation();
+
+  // Close sidebar on mobile when route changes
+  useEffect(() => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  }, [location.pathname, isMobile]);
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-background flex overflow-hidden">
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       <div className={cn(
-        "flex-1 flex flex-col transition-all duration-200 ease-in-out overflow-hidden",
+        "flex-1 flex flex-col transition-all duration-200 ease-in-out w-full max-w-full",
         sidebarOpen && !isMobile ? "ml-64" : ""
       )}>
         <Header toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />

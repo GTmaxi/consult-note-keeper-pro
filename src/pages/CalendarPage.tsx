@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { CalendarWithEvents } from "@/features/calendar/CalendarWithEvents";
 import { EventList } from "@/features/calendar/EventList";
 import { CalendarHeader } from "@/features/calendar/CalendarHeader";
-import { mockEvents } from "@/features/calendar/data"; // Fixed the import
+import { mockEvents } from "@/features/calendar/data";
 
 const CalendarPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   
   return (
-    <div className="w-full max-w-full space-y-6 overflow-x-hidden">
+    <div className="w-full max-w-full space-y-6">
       <Card className="w-full">
         <CardHeader className="pb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center">
           <CardTitle>行事曆</CardTitle>
@@ -25,7 +25,7 @@ const CalendarPage = () => {
               onDateChange={setSelectedDate} 
             />
             <div>
-              <CalendarHeader setSelectedDate={setSelectedDate} /> {/* Fixed the prop name */}
+              <CalendarHeader setSelectedDate={setSelectedDate} />
               <EventList 
                 events={mockEvents} 
                 selectedDate={selectedDate}

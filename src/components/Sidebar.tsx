@@ -66,7 +66,6 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                 "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
                 isActive('/') && "bg-primary-foreground/10"
               )}
-              onClick={() => setOpen(false)}
             >
               <svg
                 className="w-5 h-5"
@@ -98,7 +97,6 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                 "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
                 isActive('/clients') && "bg-primary-foreground/10"
               )}
-              onClick={() => setOpen(false)}
             >
               <UserIcon className="w-5 h-5" />
               <span>客戶列表</span>
@@ -110,7 +108,6 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                 "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
                 isActive('/visits') && "bg-primary-foreground/10"
               )}
-              onClick={() => setOpen(false)}
             >
               <ClockIcon className="w-5 h-5" />
               <span>拜訪記錄</span>
@@ -122,7 +119,6 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                 "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
                 isActive('/notes') && "bg-primary-foreground/10"
               )}
-              onClick={() => setOpen(false)}
             >
               <FileTextIcon className="w-5 h-5" />
               <span>筆記整理</span>
@@ -134,7 +130,6 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                 "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
                 isActive('/calendar') && "bg-primary-foreground/10"
               )}
-              onClick={() => setOpen(false)}
             >
               <CalendarIcon className="w-5 h-5" />
               <span>行事曆</span>
