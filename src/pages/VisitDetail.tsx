@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +11,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { CalendarIcon, ClockIcon, MapPinIcon, UserIcon, FileTextIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // Mock data for a specific visit
 const mockVisitDetails = {
