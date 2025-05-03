@@ -42,8 +42,8 @@ export function CalendarWithEvents({
       className="rounded-md border shadow"
       locale={zhTW}
       components={{
-        day: ({ day, ...props }) => {
-          const dayEvents = getEventsForDay(day);
+        Day: ({ date, ...props }) => {
+          const dayEvents = getEventsForDay(date);
           const hasEvents = dayEvents.length > 0;
           return (
             <div
@@ -53,7 +53,7 @@ export function CalendarWithEvents({
                 hasEvents && "relative"
               )}
             >
-              {format(day, "d")}
+              {format(date, "d")}
               {hasEvents && (
                 <Badge
                   className="absolute -bottom-1 -right-1 h-4 w-4 p-0 flex items-center justify-center text-[10px]"

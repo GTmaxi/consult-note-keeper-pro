@@ -79,8 +79,8 @@ const NotesPage = () => {
   });
 
   return (
-    <div className="space-y-6">
-      <Card>
+    <div className="w-full max-w-full space-y-6 overflow-x-hidden">
+      <Card className="w-full">
         <CardHeader className="pb-3">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <CardTitle>筆記整理</CardTitle>

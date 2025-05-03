@@ -1,34 +1,39 @@
 
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { CalendarHeader } from "@/features/calendar/CalendarHeader";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { CalendarWithEvents } from "@/features/calendar/CalendarWithEvents";
 import { EventList } from "@/features/calendar/EventList";
-import { mockEvents } from "@/features/calendar/data";
+import { CalendarHeader } from "@/features/calendar/CalendarHeader";
+import { events as mockEvents } from "@/features/calendar/data";
 
 const CalendarPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   
   return (
-    <div className="space-y-6">
-      <CalendarHeader setSelectedDate={setSelectedDate} />
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="lg:col-span-1">
-          <CardContent className="p-4">
+    <div className="w-full max-w-full space-y-6 overflow-x-hidden">
+      <Card className="w-full">
+        <CardHeader className="pb-3 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+          <CardTitle>行事曆</CardTitle>
+          <Button onClick={() => console.log("新增事件")}>新增事件</Button>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-6">
             <CalendarWithEvents 
-              events={mockEvents}
-              selectedDate={selectedDate}
-              onSelectDate={(date) => date && setSelectedDate(date)}
+              events={mockEvents} 
+              selectedDate={selectedDate} 
+              onDateChange={setSelectedDate} 
             />
-          </CardContent>
-        </Card>
-        
-        <EventList 
-          events={mockEvents}
-          selectedDate={selectedDate}
-        />
-      </div>
+            <div>
+              <CalendarHeader selectedDate={selectedDate} />
+              <EventList 
+                events={mockEvents} 
+                selectedDate={selectedDate}
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
