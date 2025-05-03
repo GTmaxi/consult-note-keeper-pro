@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CalendarWithEvents } from "@/features/calendar/CalendarWithEvents";
 import { EventList } from "@/features/calendar/EventList";
 import { CalendarHeader } from "@/features/calendar/CalendarHeader";
-import { events as mockEvents } from "@/features/calendar/data";
+import { mockEvents } from "@/features/calendar/data"; // Fixed the import
 
 const CalendarPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -25,7 +25,7 @@ const CalendarPage = () => {
               onDateChange={setSelectedDate} 
             />
             <div>
-              <CalendarHeader selectedDate={selectedDate} />
+              <CalendarHeader setSelectedDate={setSelectedDate} /> {/* Fixed the prop name */}
               <EventList 
                 events={mockEvents} 
                 selectedDate={selectedDate}

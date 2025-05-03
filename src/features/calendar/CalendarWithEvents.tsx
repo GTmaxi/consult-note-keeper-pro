@@ -1,6 +1,6 @@
 
 import React from "react";
-import { format, isSameDay, parseISO } from "date-fns";
+import { format, isSameDay } from "date-fns";
 import { zhTW } from "date-fns/locale";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
@@ -20,18 +20,12 @@ export function CalendarWithEvents({
 }: CalendarWithEventsProps) {
   // Function to highlight dates with events
   function isDayWithEvent(day: Date) {
-    return events.some((event) => {
-      const eventDate = parseISO(event.date);
-      return isSameDay(eventDate, day);
-    });
+    return events.some((event) => isSameDay(event.date, day));
   }
 
   // Count events for a specific day
   function getEventsForDay(day: Date) {
-    return events.filter((event) => {
-      const eventDate = parseISO(event.date);
-      return isSameDay(eventDate, day);
-    });
+    return events.filter((event) => isSameDay(event.date, day));
   }
 
   return (
@@ -42,7 +36,7 @@ export function CalendarWithEvents({
       className="rounded-md border shadow"
       locale={zhTW}
       components={{
-        Day: ({ date, ...props }) => {
+        Day: ({ date, ...props }: { date: Date; className?: string }) => {
           const dayEvents = getEventsForDay(date);
           const hasEvents = dayEvents.length > 0;
           return (
