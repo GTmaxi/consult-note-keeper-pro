@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,7 +45,7 @@ const ClientList = () => {
       client.phone.includes(searchQuery) ||
       client.email.includes(searchQuery);
       
-    const matchesStatus = !statusFilter || client.status === statusFilter;
+    const matchesStatus = !statusFilter || statusFilter === "all" || client.status === statusFilter;
     
     return matchesSearch && matchesStatus;
   });
@@ -77,7 +78,7 @@ const ClientList = () => {
                 <SelectValue placeholder="篩選狀態" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">所有狀態</SelectItem>
+                <SelectItem value="all">所有狀態</SelectItem>
                 <SelectItem value="已簽約">已簽約</SelectItem>
                 <SelectItem value="提案中">提案中</SelectItem>
                 <SelectItem value="追蹤中">追蹤中</SelectItem>

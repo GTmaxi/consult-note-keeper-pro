@@ -73,7 +73,7 @@ const NotesPage = () => {
       note.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
       note.client.toLowerCase().includes(searchQuery.toLowerCase());
       
-    const matchesTag = !tagFilter || note.tags.includes(tagFilter);
+    const matchesTag = !tagFilter || tagFilter === "all" || note.tags.includes(tagFilter);
     
     return matchesSearch && matchesTag;
   });
@@ -106,7 +106,7 @@ const NotesPage = () => {
                 <SelectValue placeholder="篩選標籤" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">所有標籤</SelectItem>
+                <SelectItem value="all">所有標籤</SelectItem>
                 {allTags.map(tag => (
                   <SelectItem key={tag} value={tag}>{tag}</SelectItem>
                 ))}

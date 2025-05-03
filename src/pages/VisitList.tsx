@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -84,6 +85,7 @@ const VisitList = () => {
       
     const matchesStatus = 
       !statusFilter || 
+      statusFilter === "all" ||
       (statusFilter === "completed" && visit.completed) ||
       (statusFilter === "upcoming" && !visit.completed);
     
@@ -118,7 +120,7 @@ const VisitList = () => {
                 <SelectValue placeholder="篩選狀態" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">所有拜訪</SelectItem>
+                <SelectItem value="all">所有拜訪</SelectItem>
                 <SelectItem value="completed">已完成</SelectItem>
                 <SelectItem value="upcoming">即將拜訪</SelectItem>
               </SelectContent>
