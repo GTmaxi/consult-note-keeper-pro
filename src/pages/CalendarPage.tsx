@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { zh } from "date-fns/locale";
+import { zhTW } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { CalendarIcon, ClockIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -139,7 +139,7 @@ const CalendarPage = () => {
               selected={selectedDate}
               onSelect={(date) => date && setSelectedDate(date)}
               className="rounded-md mx-auto"
-              locale={zh}
+              locale={zhTW}
               components={{
                 DayContent: (props) => renderDay(props.date),
               }}
@@ -149,7 +149,7 @@ const CalendarPage = () => {
         
         <Card className="lg:col-span-2">
           <CardHeader className="pb-3">
-            <CardTitle>{format(selectedDate, "yyyy年MM月dd日 EEEE", { locale: zh })}</CardTitle>
+            <CardTitle>{format(selectedDate, "yyyy年MM月dd日 EEEE", { locale: zhTW })}</CardTitle>
           </CardHeader>
           <CardContent>
             {eventsForSelectedDate.length > 0 ? (
