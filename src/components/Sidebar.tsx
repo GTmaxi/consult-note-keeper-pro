@@ -1,6 +1,9 @@
 
 import { cn } from "@/lib/utils";
-import { UserIcon, CalendarIcon, FileTextIcon, ClockIcon, MessageSquareIcon } from "lucide-react";
+import { 
+  UserIcon, CalendarIcon, FileTextIcon, ClockIcon, 
+  HomeIcon, PieChartIcon, BellIcon, SettingsIcon 
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 interface SidebarProps {
@@ -21,7 +24,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
       {/* Overlay for mobile */}
       <div 
         className={cn(
-          "fixed inset-0 bg-black/50 z-40 md:hidden",
+          "fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm",
           open ? "block" : "hidden"
         )}
         onClick={() => setOpen(false)}
@@ -29,13 +32,18 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
       
       <aside 
         className={cn(
-          "fixed top-0 left-0 h-full w-64 bg-primary text-primary-foreground z-50 transition-transform md:translate-x-0",
+          "fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-primary to-primary/90 text-primary-foreground z-50 transition-transform md:translate-x-0 shadow-xl",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="h-full flex flex-col">
-          <div className="p-4 border-b border-primary-foreground/10 flex items-center justify-between">
-            <h1 className="text-xl font-bold">顧問筆記系統</h1>
+          <div className="p-5 flex items-center justify-between border-b border-primary-foreground/10">
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 rounded-md bg-white flex items-center justify-center">
+                <span className="text-primary font-bold text-xl">F</span>
+              </div>
+              <h1 className="text-xl font-bold">FinPro</h1>
+            </div>
             <button 
               className="p-1 rounded-full hover:bg-primary-foreground/10 md:hidden"
               onClick={() => setOpen(false)}
@@ -63,39 +71,19 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
             <Link
               to="/"
               className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
-                isActive('/') && "bg-primary-foreground/10"
+                "flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors",
+                isActive('/') && "bg-white/20 font-medium"
               )}
             >
-              <svg
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M9 22V12h6v10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <HomeIcon className="w-5 h-5" />
               <span>概覽</span>
             </Link>
             
             <Link
               to="/clients"
               className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
-                isActive('/clients') && "bg-primary-foreground/10"
+                "flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors",
+                isActive('/clients') && "bg-white/20 font-medium"
               )}
             >
               <UserIcon className="w-5 h-5" />
@@ -105,8 +93,8 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
             <Link
               to="/visits"
               className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
-                isActive('/visits') && "bg-primary-foreground/10"
+                "flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors",
+                isActive('/visits') && "bg-white/20 font-medium"
               )}
             >
               <ClockIcon className="w-5 h-5" />
@@ -116,8 +104,8 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
             <Link
               to="/notes"
               className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
-                isActive('/notes') && "bg-primary-foreground/10"
+                "flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors",
+                isActive('/notes') && "bg-white/20 font-medium"
               )}
             >
               <FileTextIcon className="w-5 h-5" />
@@ -127,23 +115,48 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
             <Link
               to="/calendar"
               className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded-md hover:bg-primary-foreground/10",
-                isActive('/calendar') && "bg-primary-foreground/10"
+                "flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors",
+                isActive('/calendar') && "bg-white/20 font-medium"
               )}
             >
               <CalendarIcon className="w-5 h-5" />
               <span>行事曆</span>
             </Link>
+
+            <div className="pt-4 border-t border-primary-foreground/10 mt-4">
+              <h3 className="text-xs uppercase text-primary-foreground/60 px-4 mb-2">其他功能</h3>
+              <Link
+                to="/analytics"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <PieChartIcon className="w-5 h-5" />
+                <span>數據分析</span>
+              </Link>
+              <Link
+                to="/notifications"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <BellIcon className="w-5 h-5" />
+                <span>通知中心</span>
+              </Link>
+              <Link
+                to="/settings"
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors"
+              >
+                <SettingsIcon className="w-5 h-5" />
+                <span>系統設置</span>
+              </Link>
+            </div>
           </nav>
           
-          <div className="p-4 border-t border-primary-foreground/10">
+          <div className="p-4 border-t border-primary-foreground/10 bg-primary-foreground/5">
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center">
                 <span className="text-secondary-foreground font-semibold">FL</span>
               </div>
               <div>
                 <p className="font-medium">財務顧問</p>
-                <p className="text-sm opacity-80">專業版</p>
+                <p className="text-xs opacity-80">專業版</p>
               </div>
             </div>
           </div>
